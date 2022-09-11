@@ -12,17 +12,15 @@ def main():
 		print('nothing found for: ' + query)
 
 	summary = page.summary.splitlines()
+	print("\n" + "SUMMARAY:" + "\n")
+	print(summary)
+	print("\n" + "COMPRESSED ARTICLE: " + "\n")
+	summarize_text_by_ratio(page.text)
 
-	summarize_text_by_ratio(page.summary)
 
-
-def print_sparse(str_in):
-	for line in str_in:
-		print(line)
-		print('\n')
 
 def summarize_text_by_ratio(text):
-	summary_by_ratio = summarize(text,ratio=0.5)
+	summary_by_ratio = summarize(text,ratio=0.1)
 	print(summary_by_ratio)
 
 if __name__=="__main__":
