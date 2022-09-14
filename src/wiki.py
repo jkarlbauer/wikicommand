@@ -10,14 +10,16 @@ def main():
 	page = wiki.page(query)
 
 	if not page.exists():
-		print('nothing found for: ' + query)
+	    return
 
-	#summary = page.summary.splitlines()
+	wikipedia_page_summary = page.summary
 	print("\n" + "SUMMARAY:" + "\n")
-	print(page.summary)
-	print("\n" + "COMPRESSED ARTICLE: " + "\n" + summarize_text(page.text))
+	print(wikipedia_page_summary)
+	print("\n" + "COMPRESSED ARTICLE: " + "\n")
+	compressed_article = compress_article(page.text)
+	print(compressed_article)
 
-def summarize_text(body):
+def compress_article(body):
     GPT2_model = TransformerSummarizer(transformer_type="GPT2",transformer_model_key="gpt2")
     full = ''.join(GPT2_model(body, min_length=60))
     return full
