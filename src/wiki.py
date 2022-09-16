@@ -1,8 +1,6 @@
-#!/usr/bin/python3
-
 import wikipediaapi
 import sys
-from summarizer import TransformerSummarizer
+import utils
 
 def main():
 	wiki = wikipediaapi.Wikipedia('en')
@@ -10,19 +8,11 @@ def main():
 	page = wiki.page(query)
 
 	if not page.exists():
-	    return
+		print("nothing found for: " + query)
+		return
 
-	wikipedia_page_summary = page.summary
-	print("\n" + "SUMMARAY:" + "\n")
-	print(wikipedia_page_summary)
-	print("\n" + "COMPRESSED ARTICLE: " + "\n")
-	compressed_article = compress_article(page.text)
-	print(compressed_article)
-
-def compress_article(body):
-    GPT2_model = TransformerSummarizer(transformer_type="GPT2",transformer_model_key="gpt2")
-    full = ''.join(GPT2_model(body, min_length=60))
-    return full
+	utils.log(page.summary, "SUMMARY")
+	utils.log(utils.gpt2_summarize(page.text), "COMPRESSED ARTICLE")
 
 if __name__=="__main__":
 	main()
