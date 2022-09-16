@@ -18,4 +18,4 @@ install requirements:
 
 run:
 
-`python3 wiki.py "<your_query"
+`python3 wiki.py "<your_query>"
