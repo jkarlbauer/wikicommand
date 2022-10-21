@@ -14,7 +14,7 @@ To use, create and activate a virtual environment:
 
 install requirements:
 
-`pip instal -r requirements.txt`
+`pip install -r requirements.txt`
 
 run:
 
